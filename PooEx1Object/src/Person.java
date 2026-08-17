@@ -31,6 +31,11 @@ public class Person {
         this.lastName = lastName;
     }
 
+    public void display(){
+        System.out.print(lastName + ", " + firstName + ", "+ age + "ans, habitant " + address + ", ");
+        bornCity.display();
+    }
+
     @Override
     public String toString() {
         return "[lastName=" + lastName + ", firstName=" + firstName + ", age=" + age + ", address=" + (address==null?"unknown":address) + ", Ville=" + bornCity + "]";
