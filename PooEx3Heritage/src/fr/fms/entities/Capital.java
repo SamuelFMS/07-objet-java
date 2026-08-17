@@ -17,4 +17,9 @@ public class Capital extends City {
         super(cityName, nbInhabitant);
         this.monument = monument;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " monument : " + monument;
+    }
 }

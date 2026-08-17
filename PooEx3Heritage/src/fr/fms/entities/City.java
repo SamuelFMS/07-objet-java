@@ -27,7 +27,8 @@ public class City {
 
     @Override
     public String toString() {
-        return "[ville: " + cityName + "] [pays : " + (country==null?"unknown":country) + "] [nombre d'habitants : " + nbInhabitant + "]";
+        //return "[ville: " + cityName + "] [pays : " + (country==null?"unknown":country) + "] [nombre d'habitants : " + nbInhabitant + "]";
+        return cityName + ", " + (country==null?"unknown":country) + ", " + nbInhabitant + " d'habitants";
     }
 
     public void display() {
