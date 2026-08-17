@@ -8,4 +8,9 @@ public class City {
         this.country = country;
         this.nbInhabitant = nbInhabitant;
     }
+
+    @Override
+    public String toString() {
+        return "Ville: " + city + ", Pays: " + country + ", Nombre d'habitants: " + nbInhabitant;
+    }
 }
