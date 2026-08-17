@@ -1,25 +1,29 @@
 public class Person {
-    private String firstName;
-    private String lastName;
+    private final String lastName;
+    private final String firstName;
     private int age;
-    private  String address;
+    private String address;
 
-    public Person(String firstName, String lastName, int age, String address){
+    public Person(String lastName, String firstName, int age, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.address = address;
     }
 
-    public Person(String firstName, String lastName, int age){
+    public Person(String lastName, String firstName, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
     }
 
-    public Person(String firstName, String lastName){
+    public Person(String lastName, String firstName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
+    @Override
+    public String toString() {
+        return "[lastName=" + lastName + ", firstName=" + firstName + ", age=" + age + "address=" + address + "]";
+    }
 }
