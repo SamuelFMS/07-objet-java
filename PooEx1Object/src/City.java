@@ -29,7 +29,7 @@ public class City {
     }
 
     public void display() {
-        System.out.println("Ville de " + getCityName() + " en " + country + " ayant " + nbInhabitant + "d'habitants");
+        System.out.println("Ville de " + getCityName() + " au " + country + (nbInhabitant!=0?" ayant " + nbInhabitant + " d'habitants":""));
     }
 
     /*
