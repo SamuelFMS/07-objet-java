@@ -24,6 +24,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "[lastName=" + lastName + ", firstName=" + firstName + ", age=" + age + "address=" + address + "]";
+        return "[lastName=" + lastName + ", firstName=" + firstName + ", age=" + age + ", address=" + (address==null?"unknown":address) + "]";
     }
 }
