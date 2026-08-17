@@ -31,6 +31,14 @@ public class Person {
         this.lastName = lastName;
     }
 
+    public boolean checkIfAddressContain(String address) {
+        return this.address.contains(address);
+    }
+
+    public boolean checkIfBornInCountry(String country){
+        return this.bornCity.getCountry().equals(country);
+    }
+
     public void display(){
         System.out.print(lastName + ", " + firstName + ", "+ age + "ans, habitant " + address + ", ");
         bornCity.display();

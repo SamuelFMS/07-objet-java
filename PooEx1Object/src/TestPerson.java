@@ -28,6 +28,11 @@ public class TestPerson {
             celebritie.display();
         }
         System.out.println("---------------------------------------");
-
+        System.out.println("Liste après notre filtre");
+        for(Person celebritie: celebrities){
+            if(celebritie.checkIfAddressContain("Paris") || celebritie.checkIfBornInCountry("France")) {
+                celebritie.display();
+            }
+        }
     }
 }
