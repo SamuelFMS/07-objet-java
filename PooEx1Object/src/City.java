@@ -19,6 +19,10 @@ public class City {
         return "[ville: " + cityName + "] [pays : " + (country==null?"unknown":country) + "] [nombre d'habitants : " + nbInhabitant + "]";
     }
 
+    public void display() {
+        System.out.println("Ville de " + getCityName() + " en " + country + " ayant " + nbInhabitant + "d'habitants");
+    }
+
     /*
         Getter et Setter
      */
