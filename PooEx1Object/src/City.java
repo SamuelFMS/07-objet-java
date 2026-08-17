@@ -38,6 +38,9 @@ public class City {
     }
 
     public void setNbInhabitant(int nbInhabitant) {
-        this.nbInhabitant = nbInhabitant;
+        if(nbInhabitant < 0 ){
+            System.out.println("Attention! Le nombre d'habitants ne peux pas etre inferieure a 0");
+        }
+        this.nbInhabitant = Math.max(nbInhabitant, 0);
     }
 }
