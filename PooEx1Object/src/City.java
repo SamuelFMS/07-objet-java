@@ -11,6 +11,12 @@ public class City {
         nbInstances++;
     }
 
+    public City(String cityName, String country) {
+        this.cityName = cityName;
+        this.country = country;
+        nbInstances++;
+    }
+
     public City(String cityName, int nbInhabitant){
         this.cityName = cityName;
         setNbInhabitant(nbInhabitant);
