@@ -1,4 +1,5 @@
 public class City {
+    public static int nbInstances = 0;
     private String cityName;
     private String country;
     private int nbInhabitant;
@@ -7,11 +8,13 @@ public class City {
         this.cityName = cityName;
         this.country = country;
         setNbInhabitant(nbInhabitant);
+        nbInstances++;
     }
 
     public City(String cityName, int nbInhabitant){
         this.cityName = cityName;
         setNbInhabitant(nbInhabitant);
+        nbInstances++;
     }
 
     @Override

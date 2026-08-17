@@ -21,5 +21,6 @@ public class TestCity {
         rabat.setCountry("Maroc");
         System.out.println(rabat);
         toulouse.display();
+        System.out.println("Il y'a " + City.nbInstances + " de villes");
     }
 }
