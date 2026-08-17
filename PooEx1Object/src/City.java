@@ -9,6 +9,11 @@ public class City {
         setNbInhabitant(nbInhabitant);
     }
 
+    public City(String cityName, int nbInhabitant){
+        this.cityName = cityName;
+        setNbInhabitant(nbInhabitant);
+    }
+
     @Override
     public String toString() {
         return "Ville: " + cityName + ", Pays: " + country + ", Nombre d'habitants: " + nbInhabitant;
