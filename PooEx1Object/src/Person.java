@@ -3,6 +3,15 @@ public class Person {
     private final String firstName;
     private int age;
     private String address;
+    private City bornCity;
+
+    public Person(String lastName, String firstName, int age, String address, City bornCity) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.address = address;
+        this.bornCity = bornCity;
+    }
 
     public Person(String lastName, String firstName, int age, String address) {
         this.firstName = firstName;
@@ -24,6 +33,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "[lastName=" + lastName + ", firstName=" + firstName + ", age=" + age + ", address=" + (address==null?"unknown":address) + "]";
+        return "[lastName=" + lastName + ", firstName=" + firstName + ", age=" + age + ", address=" + (address==null?"unknown":address) + ", Ville=" + bornCity + "]";
     }
 }
