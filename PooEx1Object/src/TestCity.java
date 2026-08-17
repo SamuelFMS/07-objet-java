@@ -16,5 +16,9 @@ public class TestCity {
         toulouse.setNbInhabitant(470000);
         toulouse.setNbInhabitant(toulouse.getNbInhabitant() - 100000);
         System.out.println(toulouse);
+        City rabat = new City("Rabat", 577000);
+        System.out.println(rabat);
+        rabat.setCountry("Maroc");
+        System.out.println(rabat);
     }
 }
