@@ -9,4 +9,8 @@ public class Commercial extends Person {
         this.companyName = companyName;
         this.remuneration = remuneration;
     }
+
+    public String toString() {
+        return super.toString() + ", Entreprise : " + companyName + ", % CA : " + remuneration;
+    }
 }
