@@ -27,6 +27,15 @@ public abstract class Product {
      */
     private int shelfLifeDays;
 
+    public Product(String name, double unitPrice, String unite, double stockQuantity, LocalDate pickingDate, int shelfLifeDays) {
+        this.name = name;
+        this.unitPrice = unitPrice;
+        this.unite = unite;
+        this.stockQuantity = stockQuantity;
+        this.pickingDate = pickingDate;
+        this.shelfLifeDays = shelfLifeDays;
+    }
+
     public abstract LocalDate calculateExpirationDate();
 
     public void updateStockAfterOrder(double quantity) {
