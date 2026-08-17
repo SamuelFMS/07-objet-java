@@ -1,28 +1,28 @@
 public class City {
-    private String city;
+    private String cityName;
     private String country;
     private int nbInhabitant;
 
-    public City(String city, String country, int nbInhabitant) {
-        this.city = city;
+    public City(String cityName, String country, int nbInhabitant) {
+        this.cityName = cityName;
         this.country = country;
-        this.nbInhabitant = nbInhabitant;
+        setNbInhabitant(nbInhabitant);
     }
 
     @Override
     public String toString() {
-        return "Ville: " + city + ", Pays: " + country + ", Nombre d'habitants: " + nbInhabitant;
+        return "Ville: " + cityName + ", Pays: " + country + ", Nombre d'habitants: " + nbInhabitant;
     }
 
     /*
         Getter et Setter
      */
-    public String getCity() {
-        return city;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public String getCountry() {
