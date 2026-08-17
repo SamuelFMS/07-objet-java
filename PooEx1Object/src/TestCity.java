@@ -8,5 +8,7 @@ public class TestCity {
         City dublin = new City("Dublin", "Ireland",  592000);
         System.out.println(toulouse);
         System.out.println(bayonne);
+        toulouse.setNbInhabitant(toulouse.getNbInhabitant() + 20000);
+        System.out.println(toulouse);
     }
 }
