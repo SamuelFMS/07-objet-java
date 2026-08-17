@@ -41,6 +41,16 @@ public class Person {
         return this.bornCity.getCountry().equals(country);
     }
 
+    public String getAddressWithAccronym(){
+        if(address == null){
+            return "unknown";
+        }
+        if(address.equalsIgnoreCase("palo alto")){
+            return "à " + address;
+        }
+        return "aux " + address;
+    }
+
     public void display(){
         System.out.print(lastName + ", " + firstName + ", "+ age + "ans, habitant " + address + ", ");
         bornCity.display();
@@ -48,7 +58,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return lastName + ", " + firstName + ", " + age + " ans" + ", habitant " + (address==null?"unknown":address) + ", Ville de naissance: " + bornCity;
+        return lastName + ", " + firstName + ", " + age + " ans" + ", habitant " + getAddressWithAccronym() + ", Ville de naissance: " + bornCity;
     }
 }
 
