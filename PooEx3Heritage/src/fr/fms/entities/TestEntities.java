@@ -14,5 +14,8 @@ public class TestEntities {
         for(Person employeeOrCommercial: myEmployeesAndCommercials) {
             System.out.println(employeeOrCommercial);
         }
+        for(Person employeeOrCommercial: myEmployeesAndCommercials) {
+            System.out.println("Salaire mensuel de " + employeeOrCommercial.getFirstName() + " " + employeeOrCommercial.getLastName() +" : "  + employeeOrCommercial.remuneration());
+        }
     }
 }

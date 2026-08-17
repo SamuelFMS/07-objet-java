@@ -2,6 +2,7 @@ package fr.fms.entities;
 
 public class Commercial extends Person {
     public static final double minimumRemuneration = 0.01;
+    public static final double averageTurnover = 50000;
     private String companyName;
     private double remuneration;
 
@@ -9,6 +10,11 @@ public class Commercial extends Person {
         super(lastName, firstName, age, address, bornCity);
         this.companyName = companyName;
         this.setRemuneration(remuneration);
+    }
+
+    @Override
+    public Double remuneration(){
+        return averageTurnover * remuneration / 100;
     }
 
     public void setRemuneration(double remuneration){

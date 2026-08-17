@@ -29,6 +29,11 @@ public class Employee extends Person {
         this.setSalary(salary);
     }
 
+    @Override
+    public Double remuneration(){
+        return salary * 0.8;
+    }
+
     public void setSalary(double salary){
         if(salary < minimumSalary){
             System.out.println("Salaire inferieur à " + minimumSalary + " impossible");

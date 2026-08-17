@@ -33,6 +33,10 @@ public class Person {
         this.lastName = lastName;
     }
 
+    public Double remuneration() {
+        return null;
+    }
+
     public boolean checkIfAddressContain(String address) {
         return this.address.contains(address);
     }
@@ -59,6 +63,42 @@ public class Person {
     @Override
     public String toString() {
         return lastName + ", " + firstName + ", " + age + " ans" + ", habitant " + getAddressWithAccronym() + ", Ville de naissance: " + bornCity;
+    }
+
+    /*
+        Getter and Setter
+     */
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public City getBornCity() {
+        return bornCity;
+    }
+
+    public void setBornCity(City bornCity) {
+        this.bornCity = bornCity;
     }
 }
 
