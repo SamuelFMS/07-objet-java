@@ -98,6 +98,7 @@ public class Shop {
             for (Product product: deliveredProduct){
                 System.out.println(product.getName() + " a été livré");
                 product.setStockQuantity(random.nextInt(5));
+                product.setPickingDate(currentDate);
             }
         }
     }
