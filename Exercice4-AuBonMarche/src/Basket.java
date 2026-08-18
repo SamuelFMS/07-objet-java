@@ -29,4 +29,8 @@ public class Basket {
         }
         return res.toString();
     }
+
+    public ArrayList<ProductBasket> getMyBasket() {
+        return myBasket;
+    }
 }
