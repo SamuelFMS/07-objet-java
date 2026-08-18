@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Shop {
     private final ArrayList<Product> myProducts;
@@ -70,5 +71,34 @@ public class Shop {
             index++;
         }
         return res.toString();
+    }
+
+    public void updateShop(LocalDate currentDate, Random random) {
+        ArrayList<Product> expiredProduct = new ArrayList<>();
+        ArrayList<Product> deliveredProduct = new ArrayList<>();
+        for(Product product : myProducts){
+            if(product.getStockQuantity() < 1) {
+                deliveredProduct.add(product);
+            }
+            else {
+                if(product.isExpired(currentDate)) {
+                    expiredProduct.add(product);
+                }
+            }
+        }
+        if(!expiredProduct.isEmpty()) {
+            DessinAscii.displayBin();
+            for (Product expire : expiredProduct){
+                expire.setStockQuantity(0);
+                System.out.println(expire.getName() + " a expiré");
+            }
+        }
+        if(!deliveredProduct.isEmpty()) {
+            DessinAscii.displayTruck();
+            for (Product product: deliveredProduct){
+                System.out.println(product.getName() + " a été livré");
+                product.setStockQuantity(random.nextInt(5));
+            }
+        }
     }
 }
