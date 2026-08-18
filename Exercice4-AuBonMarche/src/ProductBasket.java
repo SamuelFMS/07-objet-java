@@ -15,4 +15,12 @@ public class ProductBasket {
     public String toString() {
         return product.getName() + " | " + quantity + " | " + product.realPrice() * quantity + "€";
     }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
 }
