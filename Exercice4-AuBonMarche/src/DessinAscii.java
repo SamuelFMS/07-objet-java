@@ -1,5 +1,5 @@
-public class DessinAscii {
-    public static void displayBin(){
+public interface DessinAscii {
+    static void displayBin(){
         System.out.println(" \\  ___________  /");
         System.out.println("  \\ | | | | | | /");
         System.out.println("   | | | | | | |");
@@ -8,7 +8,7 @@ public class DessinAscii {
         System.out.println("   |___________|");
     }
 
-    public static void displayTruck(){
+    static void displayTruck(){
         System.out.println("    ____________________________________________");
         System.out.println("   |                                            | ");
         System.out.println("   |                LIVRAISON                   | ___");
