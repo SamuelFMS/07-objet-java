@@ -1,9 +1,24 @@
 public class City {
+    /**
+     * Number of City in total
+     */
     public static int nbInstances = 0;
+    /**
+     * Name of the city
+     */
     private String cityName;
+    /**
+     * Country where is located the city
+     */
     private String country;
+    /**
+     * Number of inhabitant in the city
+     */
     private int nbInhabitant;
 
+    /*
+        Constructor
+     */
     public City(String cityName, String country, int nbInhabitant) {
         this.cityName = cityName;
         this.country = country;
@@ -17,19 +32,26 @@ public class City {
         nbInstances++;
     }
 
-    public City(String cityName, int nbInhabitant){
+    public City(String cityName, int nbInhabitant) {
         this.cityName = cityName;
         setNbInhabitant(nbInhabitant);
         nbInstances++;
     }
 
-    @Override
-    public String toString() {
-        return "[ville: " + cityName + "] [pays : " + (country==null?"unknown":country) + "] [nombre d'habitants : " + nbInhabitant + "]";
+    /*
+        Public Method
+     */
+
+    /**
+     * Another wqy to display a city then the toString
+     */
+    public void display() {
+        System.out.println("Ville de " + getCityName() + " au " + country + (nbInhabitant != 0 ? " ayant " + nbInhabitant + " d'habitants" : ""));
     }
 
-    public void display() {
-        System.out.println("Ville de " + getCityName() + " au " + country + (nbInhabitant!=0?" ayant " + nbInhabitant + " d'habitants":""));
+    @Override
+    public String toString() {
+        return "[ville: " + cityName + "] [pays : " + (country == null ? "unknown" : country) + "] [nombre d'habitants : " + nbInhabitant + "]";
     }
 
     /*
@@ -56,7 +78,7 @@ public class City {
     }
 
     public void setNbInhabitant(int nbInhabitant) {
-        if(nbInhabitant < 0 ){
+        if (nbInhabitant < 0) {
             System.out.println("Attention! Le nombre d'habitants ne peux pas etre inferieure a 0");
         }
         this.nbInhabitant = Math.max(nbInhabitant, 0);
