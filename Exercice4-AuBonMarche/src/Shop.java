@@ -87,18 +87,16 @@ public class Shop {
             }
         }
         if(!expiredProduct.isEmpty()) {
-            DessinAscii.displayBin();
             for (Product expire : expiredProduct){
                 DailyRecap.addToLost(expire, expire.getStockQuantity());
                 expire.setStockQuantity(0);
-                System.out.println(expire.getName() + " a expiré");
             }
         }
         if(!deliveredProduct.isEmpty()) {
-            DessinAscii.displayTruck();
             for (Product product: deliveredProduct){
-                System.out.println(product.getName() + " a été livré");
-                product.setStockQuantity(random.nextInt(10)+1);
+                int randomQuantity = random.nextInt(10)+1;
+                product.setStockQuantity(randomQuantity);
+                DailyRecap.addToDelivery(product, randomQuantity);
                 product.setPickingDate(currentDate);
             }
         }
