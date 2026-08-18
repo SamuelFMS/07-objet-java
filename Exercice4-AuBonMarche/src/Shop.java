@@ -89,6 +89,7 @@ public class Shop {
         if(!expiredProduct.isEmpty()) {
             DessinAscii.displayBin();
             for (Product expire : expiredProduct){
+                DailyRecap.addToLost(expire, expire.getStockQuantity());
                 expire.setStockQuantity(0);
                 System.out.println(expire.getName() + " a expiré");
             }
