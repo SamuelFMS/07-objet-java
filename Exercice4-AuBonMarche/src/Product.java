@@ -1,11 +1,10 @@
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public abstract class Product implements Consumable {
     /**
      * Name of the fruit or vegetable
      */
-    private String name;
+    private final String name;
     /**
      * Price per kg or per piece
      */
@@ -43,23 +42,23 @@ public abstract class Product implements Consumable {
         stockQuantity -= quantity;
     }
 
-    public String priceFormat(){
+    public String priceFormat() {
         String s;
         switch (unite) {
             case "kg":
-                s = stockQuantity + " €/kg";
+                s = unitPrice + " €/kg";
                 break;
             case "pcs":
-                s = stockQuantity + " €/pièce";
+                s = unitPrice + " €/pièce";
                 break;
             default:
-                s = unitPrice + " €/"+ unite;
+                s = unitPrice + " €/" + unite;
                 break;
         }
         return s;
     }
 
-    public String stockFormat(){
+    public String stockFormat() {
         String s;
         switch (unite) {
             case "kg":
@@ -79,6 +78,15 @@ public abstract class Product implements Consumable {
         return name + " | " + stockFormat() + " | " + priceFormat() + " | " + daysRemainingBeforeExpiration(currentDate) + " Jours";
     }
 
+    public double realPrice() {
+        return unitPrice;
+    }
+
+    @Override
+    public String toString() {
+        return name + " | " + stockFormat() + " | " + priceFormat();
+    }
+
     @Override
     public boolean isRipe() {
         return false;
@@ -90,7 +98,7 @@ public abstract class Product implements Consumable {
         return daysRemaining <= 0;
     }
 
-    public LocalDate dateItExpired(){
+    public LocalDate dateItExpired() {
         return getPickingDate().plusDays(getShelfLifeDays());
     }
 
@@ -105,10 +113,6 @@ public abstract class Product implements Consumable {
      */
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getUnitPrice() {
