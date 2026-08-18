@@ -4,7 +4,16 @@ public class Basket {
     private final ArrayList<ProductBasket> myBasket = new ArrayList<>();
 
     public void addToBasket(Product product, double quantity) {
-        myBasket.add(new ProductBasket(product, quantity));
+        boolean trouver = false;
+        for(ProductBasket productBasket : myBasket) {
+            if(productBasket.getProduct() == product) {
+                productBasket.setQuantity(productBasket.getQuantity() + quantity);
+                trouver = true;
+            }
+        }
+        if(!trouver) {
+            myBasket.add(new ProductBasket(product, quantity));
+        }
         product.setStockQuantity(product.getStockQuantity() - quantity);
     }
 
