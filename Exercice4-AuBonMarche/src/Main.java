@@ -9,70 +9,6 @@ import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    /**
-     * Function that return a double between min and max that have been input by user
-     *
-     * @param scanner
-     * @param message
-     * @param min
-     * @param max
-     * @return
-     */
-    public static Double inputDoubleBetween(Scanner scanner, String message, double min, double max) {
-        Double res = null;
-        while (res == null) {
-            System.out.println(message);
-            String stringInput = scanner.next();
-            if (stringInput.equals("q")) {
-                return null;
-            }
-            try {
-                res = Double.valueOf(stringInput);
-            } catch (Exception e) {
-                System.out.println("Veuillez entrez un nombre valide");
-            }
-            if (res != null) {
-                if (res < min || res > max) {
-                    res = null;
-                    System.out.println("Veuillez entrez un nombre entre " + min + " et " + max);
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * Function that return a int between min and max that have been input by user
-     *
-     * @param scanner
-     * @param message
-     * @param min
-     * @param max
-     * @return
-     */
-    public static Integer inputIntegerBetween(Scanner scanner, String message, int min, int max) {
-        Integer res = null;
-        while (res == null) {
-            System.out.println(message);
-            String stringInput = scanner.next();
-            if (stringInput.equals("q")) {
-                return null;
-            }
-            try {
-                res = Integer.valueOf(stringInput);
-            } catch (Exception e) {
-                System.out.println("Veuillez entrez un nombre valide");
-            }
-            if (res != null) {
-                if (res < min || res > max) {
-                    res = null;
-                    System.out.println("Veuillez entrez un nombre entre " + min + " et " + max);
-                }
-            }
-        }
-        return res;
-    }
-
     public static void placeACustomerOrder(Scanner scanner, Shop shop, LocalDate currentDate) {
         Client client = Client.registerClient(scanner);
         if (client == null) {
@@ -82,13 +18,13 @@ public class Main {
         while (isLookingAtShop) {
             System.out.println(shop.toString(currentDate));
             System.out.println(client);
-            Integer indexShop = inputIntegerBetween(scanner, "Quel article souhaitez vous ajoutez (l'index)", 1, shop.sizeShop());
+            Integer indexShop = InputUser.inputIntegerBetween(scanner, "Quel article souhaitez vous ajoutez (l'index)", 1, shop.sizeShop());
             if (indexShop == null) {
                 isLookingAtShop = false;
             } else {
                 Product selectedProduct = shop.getItemShop(indexShop - 1);
                 System.out.println(selectedProduct);
-                Double quantity = inputDoubleBetween(scanner, "Entrez la quantité souhaitez", 0, selectedProduct.getStockQuantity());
+                Double quantity = InputUser.inputDoubleBetween(scanner, "Entrez la quantité souhaitez", 0, selectedProduct.getStockQuantity());
                 client.addToBasket(selectedProduct, quantity);
                 DailyRecap.addToGain(selectedProduct, quantity);
             }
@@ -107,7 +43,7 @@ public class Main {
             System.out.println("Nous sommes le " + currentDate.format(dateFormat));
             System.out.println("1- Passez une commande client");
             System.out.println("2- Passez a la prochaine journée");
-            Integer userChoice = inputIntegerBetween(scanner, "Entrez ce que vous souhaitez faire", 1, 2);
+            Integer userChoice = InputUser.inputIntegerBetween(scanner, "Entrez ce que vous souhaitez faire", 1, 2);
             if (userChoice != null) {
                 switch (userChoice) {
                     case 1:
