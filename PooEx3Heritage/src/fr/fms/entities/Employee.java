@@ -1,10 +1,22 @@
 package fr.fms.entities;
 
 public class Employee extends Person {
+    /**
+     * Salary minimum of an Employee
+     */
     public static final double minimumSalary = 1;
-    private String companyName;
+    /**
+     * Name of the Company Employee work for
+     */
+    private final String companyName;
+    /**
+     * Salary of the employee
+     */
     private double salary;
 
+    /*
+        Constructor
+     */
     public Employee(String lastName, String firstName, int age, String address, City bornCity, String companyName, double salary) {
         super(lastName, firstName, age, address, bornCity);
         this.companyName = companyName;
@@ -29,13 +41,25 @@ public class Employee extends Person {
         this.setSalary(salary);
     }
 
+    /*
+        Public method
+     */
+
+    /**
+     * Math of the remuneration
+     *
+     * @return
+     */
     @Override
-    public Double remuneration(){
+    public Double remuneration() {
         return salary * 0.8;
     }
 
-    public void setSalary(double salary){
-        if(salary < minimumSalary){
+    /*
+        Getter and setter
+     */
+    public void setSalary(double salary) {
+        if (salary < minimumSalary) {
             System.out.println("Salaire inferieur à " + minimumSalary + " impossible");
         }
         this.salary = Math.max(salary, minimumSalary);

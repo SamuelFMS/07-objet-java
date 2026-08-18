@@ -1,12 +1,30 @@
 package fr.fms.entities;
 
 public class Person {
+    /**
+     * Last Name of the person
+     */
     private final String lastName;
+    /**
+     * First name of the person
+     */
     private final String firstName;
+    /**
+     * How old is the person
+     */
     private int age;
+    /**
+     * Address of the Person
+     */
     private String address;
+    /**
+     * The city of the Person
+     */
     private City bornCity;
 
+    /*
+        Constructor
+     */
     public Person(String lastName, String firstName, int age, String address, City bornCity) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,30 +51,55 @@ public class Person {
         this.lastName = lastName;
     }
 
+    /**
+     * remuneration of the person doesnt have a salary so null
+     *
+     * @return
+     */
     public Double remuneration() {
         return null;
     }
 
-    public boolean checkIfAddressContain(String address) {
-        return this.address.contains(address);
+    /**
+     * Check if thewordToCheck is in address
+     *
+     * @param wordToCheck
+     * @return
+     */
+    public boolean checkIfAddressContain(String wordToCheck) {
+        return this.address.contains(wordToCheck);
     }
 
-    public boolean checkIfBornInCountry(String country){
+    /**
+     * Check if the Person in born in the country
+     *
+     * @param country
+     * @return
+     */
+    public boolean checkIfBornInCountry(String country) {
         return this.bornCity.getCountry().equals(country);
     }
 
-    public String getAddressWithAccronym(){
-        if(address == null){
+    /**
+     * Give the address with the accronym
+     *
+     * @return
+     */
+    public String getAddressWithAccronym() {
+        if (address == null) {
             return "unknown";
         }
-        if(address.equalsIgnoreCase("palo alto")){
+        if (address.equalsIgnoreCase("palo alto")) {
             return "à " + address;
         }
         return "aux " + address;
     }
 
-    public void display(){
-        System.out.print(lastName + ", " + firstName + ", "+ age + "ans, habitant " + address + ", ");
+    /**
+     * Other way to display
+     */
+    public void display() {
+        System.out.print(lastName + ", " + firstName + ", " + age + "ans, habitant " + address + ", ");
         bornCity.display();
     }
 
