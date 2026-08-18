@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Shop {
+    /**
+     * Products of the shop
+     */
     private final ArrayList<Product> myProducts;
 
     public Shop() {
@@ -54,12 +57,57 @@ public class Shop {
         myProducts.add(salsify);
     }
 
+    /**
+     * Get the number of Product in the shop
+     *
+     * @return
+     */
     public int sizeShop() {
         return myProducts.size();
     }
 
+    /**
+     * Return the product in the shop
+     *
+     * @param index
+     * @return
+     */
     public Product getItemShop(int index) {
         return myProducts.get(index);
+    }
+
+    /**
+     * Update the shop after a day
+     *
+     * @param currentDate
+     * @param random
+     */
+    public void updateShop(LocalDate currentDate, Random random) {
+        ArrayList<Product> expiredProduct = new ArrayList<>();
+        ArrayList<Product> deliveredProduct = new ArrayList<>();
+        for (Product product : myProducts) {
+            if (product.getStockQuantity() < 1) {
+                deliveredProduct.add(product);
+            } else {
+                if (product.isExpired(currentDate)) {
+                    expiredProduct.add(product);
+                }
+            }
+        }
+        if (!expiredProduct.isEmpty()) {
+            for (Product expire : expiredProduct) {
+                DailyRecap.addToLost(expire, expire.getStockQuantity());
+                expire.setStockQuantity(0);
+            }
+        }
+        if (!deliveredProduct.isEmpty()) {
+            for (Product product : deliveredProduct) {
+                int randomQuantity = random.nextInt(10) + 1;
+                product.setStockQuantity(randomQuantity);
+                DailyRecap.addToDelivery(product, randomQuantity);
+                product.setPickingDate(currentDate);
+            }
+        }
     }
 
     public String toString(LocalDate currentDate) {
@@ -71,34 +119,5 @@ public class Shop {
             index++;
         }
         return res.toString();
-    }
-
-    public void updateShop(LocalDate currentDate, Random random) {
-        ArrayList<Product> expiredProduct = new ArrayList<>();
-        ArrayList<Product> deliveredProduct = new ArrayList<>();
-        for(Product product : myProducts){
-            if(product.getStockQuantity() < 1) {
-                deliveredProduct.add(product);
-            }
-            else {
-                if(product.isExpired(currentDate)) {
-                    expiredProduct.add(product);
-                }
-            }
-        }
-        if(!expiredProduct.isEmpty()) {
-            for (Product expire : expiredProduct){
-                DailyRecap.addToLost(expire, expire.getStockQuantity());
-                expire.setStockQuantity(0);
-            }
-        }
-        if(!deliveredProduct.isEmpty()) {
-            for (Product product: deliveredProduct){
-                int randomQuantity = random.nextInt(10)+1;
-                product.setStockQuantity(randomQuantity);
-                DailyRecap.addToDelivery(product, randomQuantity);
-                product.setPickingDate(currentDate);
-            }
-        }
     }
 }

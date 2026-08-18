@@ -1,4 +1,10 @@
 public interface TextFormatter {
+    /**
+     * Truncate or append a text
+     * @param text
+     * @param length
+     * @return
+     */
     static String formatSize(String text, int length) {
         String safeText = (text == null) ? "" : text;
         if (safeText.length() > length) {

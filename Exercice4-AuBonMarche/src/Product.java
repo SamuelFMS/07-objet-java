@@ -27,6 +27,9 @@ public abstract class Product implements Consumable {
      */
     private int shelfLifeDays;
 
+    /*
+        Constructor
+    */
     public Product(String name, double unitPrice, String unite, double stockQuantity, LocalDate pickingDate, int shelfLifeDays) {
         this.name = name;
         this.unitPrice = unitPrice;
@@ -36,12 +39,25 @@ public abstract class Product implements Consumable {
         this.shelfLifeDays = shelfLifeDays;
     }
 
+    /*
+        Public method
+     */
     public abstract LocalDate calculateExpirationDate();
 
+    /**
+     * Update a stock after an order
+     *
+     * @param quantity
+     */
     public void updateStockAfterOrder(double quantity) {
         stockQuantity -= quantity;
     }
 
+    /**
+     * Return the price in the good format
+     *
+     * @return
+     */
     public String priceFormat() {
         String s;
         switch (unite) {
@@ -58,6 +74,11 @@ public abstract class Product implements Consumable {
         return s;
     }
 
+    /**
+     * Return the stock in the good format
+     *
+     * @return
+     */
     public String stockFormat() {
         String s;
         switch (unite) {
@@ -78,30 +99,56 @@ public abstract class Product implements Consumable {
         return name + " | " + stockFormat() + " | " + priceFormat() + " | " + daysRemainingBeforeExpiration(currentDate) + " Jours";
     }
 
-    public double realPrice() {
-        return unitPrice;
-    }
 
     @Override
     public String toString() {
         return name + " | " + stockFormat() + " | " + priceFormat();
     }
 
+    /**
+     * A faire
+     */
+    public double realPrice() {
+        return unitPrice;
+    }
+
+    /**
+     * is good
+     *
+     * @return
+     */
     @Override
     public boolean isRipe() {
         return false;
     }
 
+    /**
+     * Is expired
+     *
+     * @param dateVerification
+     * @return
+     */
     @Override
     public boolean isExpired(LocalDate dateVerification) {
         long daysRemaining = daysRemainingBeforeExpiration(dateVerification);
         return daysRemaining <= 0;
     }
 
+    /**
+     * Date when it expired
+     *
+     * @return
+     */
     public LocalDate dateItExpired() {
         return getPickingDate().plusDays(getShelfLifeDays());
     }
 
+    /**
+     * Number of days before it expired
+     *
+     * @param dateVerification
+     * @return
+     */
     @Override
     public long daysRemainingBeforeExpiration(LocalDate dateVerification) {
         LocalDate dateItExpired = dateItExpired();
