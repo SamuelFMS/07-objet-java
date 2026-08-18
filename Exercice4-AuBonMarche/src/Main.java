@@ -90,6 +90,7 @@ public class Main {
                 System.out.println(selectedProduct);
                 Double quantity = inputDoubleBetween(scanner, "Entrez la quantité souhaitez", 0, selectedProduct.getStockQuantity());
                 client.addToBasket(selectedProduct, quantity);
+                DailyRecap.addToGain(selectedProduct, quantity);
             }
         }
     }
@@ -99,6 +100,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Shop shop = new Shop();
         LocalDate currentDate = LocalDate.of(2025, Month.JANUARY, 1);
+        DailyRecap.initDay(currentDate);
         boolean ongoing = true;
         while (ongoing) {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(Locale.FRANCE);
@@ -127,6 +129,8 @@ public class Main {
         System.out.println("Passage a la prochaine Journee");
         currentDate = currentDate.plusDays(1);
         shop.updateShop(currentDate, random);
+        DailyRecap.displayCustomerSummaryOfTheDay();
+        DailyRecap.initDay(currentDate);
         return currentDate;
     }
 }
