@@ -3,6 +3,7 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -94,6 +95,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        Random random = new Random();
         Scanner scanner = new Scanner(System.in);
         Shop shop = new Shop();
         LocalDate currentDate = LocalDate.of(2025, Month.JANUARY, 1);
@@ -110,7 +112,7 @@ public class Main {
                         placeACustomerOrder(scanner, shop, currentDate);
                         break;
                     case 2:
-                        currentDate = passNextDate(currentDate);
+                        currentDate = passNextDate(currentDate, shop, random);
                         break;
                     default:
                         break;
@@ -121,9 +123,10 @@ public class Main {
         }
     }
 
-    private static LocalDate passNextDate(LocalDate currentDate) {
+    private static LocalDate passNextDate(LocalDate currentDate, Shop shop, Random random) {
         System.out.println("Passage a la prochaine Journee");
         currentDate = currentDate.plusDays(1);
+        shop.updateShop(currentDate, random);
         return currentDate;
     }
 }
