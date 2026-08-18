@@ -1,6 +1,7 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public abstract class Product {
+public abstract class Product implements Consumable {
     /**
      * Name of the fruit or vegetable
      */
@@ -42,10 +43,66 @@ public abstract class Product {
         stockQuantity -= quantity;
     }
 
+    public String priceFormat(){
+        String s;
+        switch (unite) {
+            case "kg":
+                s = stockQuantity + " €/kg";
+                break;
+            case "pcs":
+                s = stockQuantity + " €/pièce";
+                break;
+            default:
+                s = unitPrice + " €/"+ unite;
+                break;
+        }
+        return s;
+    }
+
+    public String stockFormat(){
+        String s;
+        switch (unite) {
+            case "kg":
+                s = stockQuantity + " kg";
+                break;
+            case "pcs":
+                s = stockQuantity + " pièces";
+                break;
+            default:
+                s = stockQuantity + unite;
+                break;
+        }
+        return s;
+    }
+
+    public String toString(LocalDate currentDate) {
+        return name + " | " + stockFormat() + " | " + priceFormat() + " | " + daysRemainingBeforeExpiration(currentDate) + " Jours";
+    }
+
+    @Override
+    public boolean isRipe() {
+        return false;
+    }
+
+    @Override
+    public boolean isExpired(LocalDate dateVerification) {
+        long daysRemaining = daysRemainingBeforeExpiration(dateVerification);
+        return daysRemaining <= 0;
+    }
+
+    public LocalDate dateItExpired(){
+        return getPickingDate().plusDays(getShelfLifeDays());
+    }
+
+    @Override
+    public long daysRemainingBeforeExpiration(LocalDate dateVerification) {
+        LocalDate dateItExpired = dateItExpired();
+        return dateItExpired.compareTo(dateVerification);
+    }
+
     /*
      * Getter et Setter
      */
-
     public String getName() {
         return name;
     }
