@@ -1,11 +1,10 @@
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Shop {
-    private ArrayList<Product> myProducts;
+    private final ArrayList<Product> myProducts;
 
-    public Shop(){
+    public Shop() {
         LocalDate firstOFJanuaryTwoThousandsAndTwentyFive = LocalDate.of(2025, 01, 01);
 
         Fruit clementine = new Fruit("Clémentine", 2.9, "kg", 6, firstOFJanuaryTwoThousandsAndTwentyFive, 14);
@@ -54,11 +53,21 @@ public class Shop {
         myProducts.add(salsify);
     }
 
+    public int sizeShop() {
+        return myProducts.size();
+    }
+
+    public Product getItemShop(int index) {
+        return myProducts.get(index);
+    }
+
     public String toString(LocalDate currentDate) {
         StringBuilder res = new StringBuilder();
-        res.append("Fruit / Légume | ").append("Stock | ").append("Prix(au kg ou a l'unité) | ").append("Nombre de jours restants avant péremption").append("\n");
-        for (Product product: myProducts){
-            res.append(product.toString(currentDate)).append("\n");
+        res.append("Index | ").append("Fruit / Légume | ").append("Stock | ").append("Prix(au kg ou a l'unité) | ").append("Nombre de jours restants avant péremption").append("\n");
+        int index = 1;
+        for (Product product : myProducts) {
+            res.append(index).append(" | ").append(product.toString(currentDate)).append("\n");
+            index++;
         }
         return res.toString();
     }
