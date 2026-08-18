@@ -97,7 +97,7 @@ public class Shop {
             DessinAscii.displayTruck();
             for (Product product: deliveredProduct){
                 System.out.println(product.getName() + " a été livré");
-                product.setStockQuantity(random.nextInt(5));
+                product.setStockQuantity(random.nextInt(10)+1);
                 product.setPickingDate(currentDate);
             }
         }
