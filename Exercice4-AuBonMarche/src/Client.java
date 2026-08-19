@@ -97,6 +97,7 @@ public class Client {
      */
     public void addToBasket(Product product, double quantity) {
         myBasket.addToBasket(product, quantity);
+        product.setStockQuantity(product.getStockQuantity() - quantity);
     }
 
     @Override

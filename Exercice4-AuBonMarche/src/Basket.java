@@ -23,7 +23,6 @@ public class Basket {
         if (!trouver) {
             myBasket.add(new ProductBasket(product, quantity));
         }
-        product.setStockQuantity(product.getStockQuantity() - quantity);
     }
 
     /**
