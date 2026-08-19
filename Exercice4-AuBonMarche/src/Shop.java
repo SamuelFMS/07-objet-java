@@ -96,7 +96,7 @@ public class Shop {
         }
         if (!expiredProduct.isEmpty()) {
             for (Product expire : expiredProduct) {
-                DailyRecap.addToLost(expire, expire.getStockQuantity());
+                DailyRecap.getCurrentRecap().addToLost(expire, expire.getStockQuantity());
                 expire.setStockQuantity(0);
             }
         }
@@ -104,7 +104,7 @@ public class Shop {
             for (Product product : deliveredProduct) {
                 int randomQuantity = random.nextInt(10) + 1;
                 product.setStockQuantity(randomQuantity);
-                DailyRecap.addToDelivery(product, randomQuantity);
+                DailyRecap.getCurrentRecap().addToDelivery(product, randomQuantity);
                 product.setPickingDate(currentDate);
             }
         }

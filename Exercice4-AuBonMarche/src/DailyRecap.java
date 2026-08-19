@@ -1,43 +1,44 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-public final class DailyRecap {
+public class DailyRecap {
+
+    private static DailyRecap currentRecap;
+
+    private static ArrayList<DailyRecap> listOfAllRecap = new ArrayList<>();
     /**
      * Date of the recap
      */
-    private static LocalDate currentDate;
+    private final LocalDate currentDate;
     /**
      * All the sales of the day
      */
-    private static Basket sales;
+    private Basket sales;
     /**
      * All the lost of the day
      */
-    private static Basket lost;
+    private Basket lost;
     /**
      * All the delivery of the day
      */
-    private static Basket delivery;
+    private Basket delivery;
 
     /*
         Public Method
      */
-
-    /**
-     * Init a day to start over a brand new day
-     *
-     * @param currentDate
-     */
-    public static void initDay(LocalDate currentDate) {
-        DailyRecap.currentDate = currentDate;
+    public DailyRecap(LocalDate currentDate){
+        this.currentDate = currentDate;
+        currentRecap = this;
         sales = new Basket();
         lost = new Basket();
         delivery = new Basket();
+        listOfAllRecap.add(this);
     }
 
     /**
      * Display the summary of the day
      */
-    public static void displayCustomerSummaryOfTheDay() {
+    public void displayCustomerSummaryOfTheDay() {
         System.out.println("____________________________________________________");
         System.out.println("|                                                  |");
         System.out.println("|  RECAPITULATIF JOURNALIER : CHIFFRE D'AFFAIRES   |");
@@ -65,22 +66,35 @@ public final class DailyRecap {
         System.out.println("|__________________________________________________|");
     }
 
+    public static void searchDailyRecapAndPrint(LocalDate date) {
+        boolean trouver = false;
+        for (DailyRecap dailyRecap : DailyRecap.listOfAllRecap) {
+            if(dailyRecap.currentDate.equals(date)) {
+                dailyRecap.displayCustomerSummaryOfTheDay();
+                trouver = true;
+            }
+        }
+        if(!trouver) {
+            System.out.println("Nous n'avons pas trouver le recap pour ce jour");
+        }
+    }
+
     /*
         Setter
      */
-    public static void addToLost(Product product, double quantity) {
+    public void addToLost(Product product, double quantity) {
         lost.addToBasket(product, quantity);
     }
 
-    public static void addToGain(Product product, double quantity) {
+    public void addToGain(Product product, double quantity) {
         sales.addToBasket(product, quantity);
     }
 
-    public static void addToDelivery(Product product, double quantity) {
+    public void addToDelivery(Product product, double quantity) {
         delivery.addToBasket(product, quantity);
     }
 
-    public static void setCurrentDate(LocalDate currentDate) {
-        DailyRecap.currentDate = currentDate;
+    public static DailyRecap getCurrentRecap() {
+        return currentRecap;
     }
 }

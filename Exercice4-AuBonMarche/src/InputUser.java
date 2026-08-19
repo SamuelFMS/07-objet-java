@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public interface InputUser {
@@ -63,5 +65,20 @@ public interface InputUser {
             }
         }
         return res;
+    }
+
+    static LocalDate inputDate(Scanner scanner, String message) {
+        LocalDate inputDateTime =  null;
+        while (inputDateTime == null){
+            System.out.println(message);
+            String inputString = scanner.next();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            try {
+                inputDateTime = LocalDate.parse(inputString, formatter);
+            } catch (Exception e) {
+                System.out.println("Veuillez entre une date (jj-mm-aaaa)");
+            }
+        }
+        return inputDateTime;
     }
 }
