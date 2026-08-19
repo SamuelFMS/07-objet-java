@@ -110,13 +110,62 @@ public class Shop {
         }
     }
 
+    public ArrayList<Fruit> getAllFruits() {
+        ArrayList<Fruit> maListe = new ArrayList<>();
+        for(Product product : myProducts){
+            if(product instanceof Fruit){
+                maListe.add((Fruit) product);
+            }
+        }
+        return maListe;
+    }
+
+    public ArrayList<Vegetable> getAllVegetables() {
+        ArrayList<Vegetable> maListe = new ArrayList<>();
+        for(Product product : myProducts){
+            if(product instanceof Vegetable){
+                maListe.add((Vegetable) product);
+            }
+        }
+        return maListe;
+    }
+
     public String toString(LocalDate currentDate) {
         Table displayShopTable = new Table();
-        displayShopTable.addLine("ID", "Produit", "Stock", "Prix", "Périme dans (J)");
-        int index = 1;
-        for (Product product : myProducts) {
-            displayShopTable.addLine(String.valueOf(index), product.getName(), product.stockFormat(), product.priceFormat(), product.daysRemainingBeforeExpiration(currentDate) + " Jours");
-            index++;
+        displayShopTable.addLine("ID", "Fruit", "Stock", "Prix", "Périme dans (J)", "ID", "Légumes", "Stock", "Prix", "Périme dans (J)");
+        ArrayList<Fruit> myFruits = getAllFruits();
+        ArrayList<Vegetable> myVegetables = getAllVegetables();
+        for(int i = 0; i < Math.max(myFruits.size(), myVegetables.size()); i++){
+            String[] result = new String[10];
+            if(i < myFruits.size()){
+                result[0] = String.valueOf(i+1);
+                result[1] = myFruits.get(i).getName();
+                result[2] = myFruits.get(i).stockFormat();
+                result[3] = myFruits.get(i).priceFormat();
+                result[4] = myFruits.get(i).daysRemainingBeforeExpiration(currentDate) + " Jours";
+            }
+            else {
+                result[0] = "";
+                result[1] = "";
+                result[2] = "";
+                result[3] = "";
+                result[4] = "";
+            }
+            if(i < myVegetables.size()) {
+                result[5] = String.valueOf(i+myFruits.size()+1);
+                result[6] = myVegetables.get(i).getName();
+                result[7] = myVegetables.get(i).stockFormat();
+                result[8] = myVegetables.get(i).priceFormat();
+                result[9] = myVegetables.get(i).daysRemainingBeforeExpiration(currentDate) + " Jours";
+            }
+            else {
+                result[5] = "";
+                result[6] = "";
+                result[7] = "";
+                result[8] = "";
+                result[9] = "";
+            }
+            displayShopTable.addLine(result);
         }
         return displayShopTable.toString();
     }
