@@ -102,9 +102,7 @@ public class Client {
 
     @Override
     public String toString() {
-        String res = "Le panier de " + firstName +
-                " " + lastName + "\n----------------\n" +
+        return "VOTRE PANIER ACTUEL\n" +
                 myBasket;
-        return res;
     }
 }

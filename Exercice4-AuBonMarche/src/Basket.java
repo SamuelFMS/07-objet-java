@@ -40,15 +40,27 @@ public class Basket {
 
     @Override
     public String toString() {
+        int size = 50;
         StringBuilder res = new StringBuilder();
+        res.append(TextFormatter.repeat("-",size)).append("\n");
         if (myBasket.isEmpty()) {
-            res.append("Mon panier de basket est vide");
+            res.append("Mon panier de basket est vide \n");
         } else {
             for (ProductBasket productBasket : myBasket) {
-                res.append(productBasket).append("\n");
+                StringBuilder line = new StringBuilder();
+                StringBuilder price = new StringBuilder();
+                line.append("• ");
+                line.append(productBasket.getProduct().getName());
+                line.append(" x ");
+                line.append(productBasket.stockFormat()).append(" ");
+                price.append(productBasket.getPrice()).append(" €");
+                res.append(TextFormatter.formatSize(line.toString(),size-price.length(), "."));
+                res.append(price);
+                res.append("\n");
             }
-            res.append("Total: ").append(getPriceTotalBasket()).append("€");
         }
+        res.append(TextFormatter.repeat("-",size)).append("\n");
+        res.append("TOTAL TEMPORAIRE : ").append(getPriceTotalBasket()).append("€");
         return res.toString();
     }
 
