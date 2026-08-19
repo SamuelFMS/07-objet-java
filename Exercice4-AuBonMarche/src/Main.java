@@ -23,10 +23,15 @@ public class Main {
                 isLookingAtShop = false;
             } else {
                 Product selectedProduct = shop.getItemShop(indexShop - 1);
-                System.out.println(selectedProduct);
-                Double quantity = InputUser.inputDoubleBetween(scanner, "Entrez la quantité souhaitez", 0, selectedProduct.getStockQuantity());
-                client.addToBasket(selectedProduct, quantity);
-                DailyRecap.getCurrentRecap().addToGain(selectedProduct, quantity);
+                if(selectedProduct.getStockQuantity() == 0){
+                    System.out.println("Le produit ["+selectedProduct.getName()+"] est épuisé (Stock : 0.0 kg). Veuillez choisir un autre article.");
+                }
+                else {
+                    System.out.println(selectedProduct);
+                    Double quantity = InputUser.inputDoubleBetween(scanner, "Entrez la quantité souhaitez", 0, selectedProduct.getStockQuantity());
+                    client.addToBasket(selectedProduct, quantity);
+                    DailyRecap.getCurrentRecap().addToGain(selectedProduct, quantity);
+                }
             }
         }
     }

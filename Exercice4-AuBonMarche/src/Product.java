@@ -80,6 +80,9 @@ public abstract class Product implements Consumable {
      * @return
      */
     public String stockFormat() {
+        if(stockQuantity == 0){
+            return "[EPUISE]";
+        }
         String s;
         switch (unite) {
             case "kg":
