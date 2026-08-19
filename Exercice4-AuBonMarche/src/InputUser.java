@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -10,26 +12,28 @@ public interface InputUser {
      * @param message
      * @param min
      * @param max
+     * @param round
      * @return
      */
-    static Double inputDoubleBetween(Scanner scanner, String message, double min, double max) {
-        Double res = null;
+    static BigDecimal inputBigDecimalBetween(Scanner scanner, String message, BigDecimal min, BigDecimal max, int round) {
+        BigDecimal res = null;
         while (res == null) {
             System.out.println(message);
             String stringInput = scanner.next();
-            if (stringInput.equals("q")) {
+            if (stringInput.equalsIgnoreCase("q")) {
                 return null;
             }
             try {
-                res = Double.valueOf(stringInput);
-            } catch (Exception e) {
+                res = new BigDecimal(stringInput);
+                res = res.setScale(round, RoundingMode.HALF_UP);
+            } catch (NumberFormatException e) {
                 System.out.println("Veuillez entrez un nombre valide");
+                res = null; // Sécurité si l'exception lève après une assignation partielle
+                continue;
             }
-            if (res != null) {
-                if (res < min || res > max) {
-                    res = null;
-                    System.out.println("Veuillez entrez un nombre entre " + min + " et " + max);
-                }
+            if (res.compareTo(min) < 0 || res.compareTo(max) > 0) {
+                System.out.println("Veuillez entrez un nombre entre " + min + " et " + max);
+                res = null;
             }
         }
         return res;

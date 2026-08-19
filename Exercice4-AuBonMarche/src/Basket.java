@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Basket {
@@ -12,11 +13,11 @@ public class Basket {
      * @param product
      * @param quantity
      */
-    public void addToBasket(Product product, double quantity) {
+    public void addToBasket(Product product, BigDecimal quantity) {
         boolean trouver = false;
         for (ProductBasket productBasket : myBasket) {
             if (productBasket.getProduct() == product) {
-                productBasket.setQuantity(productBasket.getQuantity() + quantity);
+                productBasket.setQuantity(productBasket.getQuantity().add(quantity));
                 trouver = true;
             }
         }
@@ -30,10 +31,10 @@ public class Basket {
      *
      * @return
      */
-    public double getPriceTotalBasket() {
-        double total = 0;
+    public BigDecimal getPriceTotalBasket() {
+        BigDecimal total = BigDecimal.ZERO;
         for (ProductBasket productBasket : myBasket) {
-            total += productBasket.getPrice();
+            total = total.add(productBasket.getPrice());
         }
         return total;
     }

@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -95,9 +96,9 @@ public class Client {
      * @param product
      * @param quantity
      */
-    public void addToBasket(Product product, double quantity) {
+    public void addToBasket(Product product, BigDecimal quantity) {
         myBasket.addToBasket(product, quantity);
-        product.setStockQuantity(product.getStockQuantity() - quantity);
+        product.setStockQuantity(product.getStockQuantity().subtract(quantity));
     }
 
     @Override

@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
@@ -86,7 +87,7 @@ public class Shop {
         ArrayList<Product> expiredProduct = new ArrayList<>();
         ArrayList<Product> deliveredProduct = new ArrayList<>();
         for (Product product : myProducts) {
-            if (product.getStockQuantity() < 1) {
+            if (product.getStockQuantity().compareTo(BigDecimal.ONE) < 0) {
                 deliveredProduct.add(product);
             } else {
                 if (product.isExpired(currentDate)) {
@@ -97,14 +98,14 @@ public class Shop {
         if (!expiredProduct.isEmpty()) {
             for (Product expire : expiredProduct) {
                 DailyRecap.getCurrentRecap().addToLost(expire, expire.getStockQuantity());
-                expire.setStockQuantity(0);
+                expire.setStockQuantity(BigDecimal.valueOf(0));
             }
         }
         if (!deliveredProduct.isEmpty()) {
             for (Product product : deliveredProduct) {
                 int randomQuantity = random.nextInt(10) + 1;
-                product.setStockQuantity(randomQuantity);
-                DailyRecap.getCurrentRecap().addToDelivery(product, randomQuantity);
+                product.setStockQuantity(BigDecimal.valueOf(randomQuantity));
+                DailyRecap.getCurrentRecap().addToDelivery(product, BigDecimal.valueOf(randomQuantity));
                 product.setPickingDate(currentDate);
             }
         }

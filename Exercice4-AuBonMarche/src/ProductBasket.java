@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class ProductBasket {
     /**
      * Product
@@ -6,12 +9,12 @@ public class ProductBasket {
     /**
      * quantity of the product
      */
-    private double quantity;
+    private BigDecimal quantity;
 
     /*
         Constructor
      */
-    public ProductBasket(Product product, double quantity) {
+    public ProductBasket(Product product,  BigDecimal quantity) {
         this.product = product;
         this.quantity = quantity;
     }
@@ -40,13 +43,13 @@ public class ProductBasket {
      * Get the price of the product basket
      * @return
      */
-    public double getPrice() {
-        return product.realPrice() * quantity;
+    public BigDecimal getPrice() {
+        return product.realPrice().multiply(quantity).setScale(2, RoundingMode.HALF_UP);
     }
 
     @Override
     public String toString() {
-        return product.getName() + " | " + quantity + " | " + product.realPrice() * quantity + "€";
+        return product.getName() + " | " + quantity + " | " + getPrice() + "€";
     }
 
     /*
@@ -56,11 +59,11 @@ public class ProductBasket {
         return product;
     }
 
-    public double getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(double quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 }

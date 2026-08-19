@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -23,12 +24,12 @@ public class Main {
                 isLookingAtShop = false;
             } else {
                 Product selectedProduct = shop.getItemShop(indexShop - 1);
-                if(selectedProduct.getStockQuantity() == 0){
+                if(selectedProduct.getStockQuantity().equals(BigDecimal.ZERO)){
                     System.out.println("Le produit ["+selectedProduct.getName()+"] est épuisé (Stock : 0.0 kg). Veuillez choisir un autre article.");
                 }
                 else {
                     System.out.println(selectedProduct);
-                    Double quantity = InputUser.inputDoubleBetween(scanner, "Entrez la quantité souhaitez", 0, selectedProduct.getStockQuantity());
+                    BigDecimal quantity = InputUser.inputBigDecimalBetween(scanner, "Entrez la quantité souhaitez", BigDecimal.valueOf(0), selectedProduct.getStockQuantity(),2);
                     client.addToBasket(selectedProduct, quantity);
                     DailyRecap.getCurrentRecap().addToGain(selectedProduct, quantity);
                 }

@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -55,14 +56,14 @@ public class DailyRecap {
 
         System.out.println("|  " + TextFormatter.formatSize("Ventes Brutes : " + sales.getPriceTotalBasket() + " €", 47) + " |");
         for (ProductBasket salesProduct : sales.getMyBasket()) {
-            System.out.println("|  " + TextFormatter.formatSize("• [" + salesProduct.getProduct().getName() + "]  ->  " + salesProduct.getQuantity() * salesProduct.getProduct().realPrice() + " €", 47) + " |");
+            System.out.println("|  " + TextFormatter.formatSize("• [" + salesProduct.getProduct().getName() + "]  ->  " + salesProduct.getPrice()  + " €", 47) + " |");
         }
-        System.out.println("|  " + TextFormatter.formatSize("Pertes (Fruits expirés) : " + (0 - lost.getPriceTotalBasket()) + " €", 47) + " |");
+        System.out.println("|  " + TextFormatter.formatSize("Pertes (Fruits expirés) : " + (BigDecimal.ZERO.subtract(lost.getPriceTotalBasket())) + " €", 47) + " |");
         for (ProductBasket lostProduct : lost.getMyBasket()) {
-            System.out.println("|  " + TextFormatter.formatSize("• [" + lostProduct.getProduct().getName() + "]  ->  -" + lostProduct.getQuantity() * lostProduct.getProduct().realPrice() + " €", 47) + " |");
+            System.out.println("|  " + TextFormatter.formatSize("• [" + lostProduct.getProduct().getName() + "]  ->  -" + lostProduct.getPrice() + " €", 47) + " |");
         }
         System.out.println("|                                                  |");
-        System.out.println("|  " + TextFormatter.formatSize("Chiffre d'affaires net: " + (sales.getPriceTotalBasket() - lost.getPriceTotalBasket()) + " €", 47) + " |");
+        System.out.println("|  " + TextFormatter.formatSize("Chiffre d'affaires net: " + (sales.getPriceTotalBasket().subtract(lost.getPriceTotalBasket())) + " €", 47) + " |");
         System.out.println("|__________________________________________________|");
     }
 
@@ -82,15 +83,15 @@ public class DailyRecap {
     /*
         Setter
      */
-    public void addToLost(Product product, double quantity) {
+    public void addToLost(Product product, BigDecimal quantity) {
         lost.addToBasket(product, quantity);
     }
 
-    public void addToGain(Product product, double quantity) {
+    public void addToGain(Product product, BigDecimal quantity) {
         sales.addToBasket(product, quantity);
     }
 
-    public void addToDelivery(Product product, double quantity) {
+    public void addToDelivery(Product product, BigDecimal quantity) {
         delivery.addToBasket(product, quantity);
     }
 

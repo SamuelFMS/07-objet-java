@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public abstract class Product implements Consumable {
@@ -8,7 +9,7 @@ public abstract class Product implements Consumable {
     /**
      * Price per kg or per piece
      */
-    private double unitPrice;
+    private BigDecimal unitPrice;
     /**
      * The unit of sale ("kg" or "piece")
      */
@@ -16,7 +17,7 @@ public abstract class Product implements Consumable {
     /**
      * Current stock (in kg or number of units)
      */
-    private double stockQuantity;
+    private BigDecimal stockQuantity;
     /**
      * The date the product was harvested
      */
@@ -30,11 +31,11 @@ public abstract class Product implements Consumable {
     /*
         Constructor
     */
-    public Product(String name, double unitPrice, String unite, double stockQuantity, LocalDate pickingDate, int shelfLifeDays) {
+    public Product(String name, double unitPrice, String unite,  double stockQuantity, LocalDate pickingDate, int shelfLifeDays) {
         this.name = name;
-        this.unitPrice = unitPrice;
+        this.unitPrice = BigDecimal.valueOf(unitPrice);
         this.unite = unite;
-        this.stockQuantity = stockQuantity;
+        this.stockQuantity = BigDecimal.valueOf(stockQuantity);
         this.pickingDate = pickingDate;
         this.shelfLifeDays = shelfLifeDays;
     }
@@ -49,8 +50,8 @@ public abstract class Product implements Consumable {
      *
      * @param quantity
      */
-    public void updateStockAfterOrder(double quantity) {
-        stockQuantity -= quantity;
+    public void updateStockAfterOrder(BigDecimal quantity) {
+        stockQuantity = stockQuantity.subtract(quantity);
     }
 
     /**
@@ -80,7 +81,7 @@ public abstract class Product implements Consumable {
      * @return
      */
     public String stockFormat() {
-        if(stockQuantity == 0){
+        if(stockQuantity.equals(BigDecimal.ZERO)){
             return "[EPUISE]";
         }
         String s;
@@ -111,7 +112,7 @@ public abstract class Product implements Consumable {
     /**
      * A faire
      */
-    public double realPrice() {
+    public BigDecimal realPrice() {
         return unitPrice;
     }
 
@@ -165,11 +166,11 @@ public abstract class Product implements Consumable {
         return name;
     }
 
-    public double getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -181,11 +182,11 @@ public abstract class Product implements Consumable {
         this.unite = unite;
     }
 
-    public double getStockQuantity() {
+    public BigDecimal getStockQuantity() {
         return stockQuantity;
     }
 
-    public void setStockQuantity(double stockQuantity) {
+    public void setStockQuantity(BigDecimal stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
 
