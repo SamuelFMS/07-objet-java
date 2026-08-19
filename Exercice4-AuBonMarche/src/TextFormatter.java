@@ -20,4 +20,15 @@ public interface TextFormatter {
         }
         return safeText;
     }
+
+    /**
+     * Repeat a String x times
+     */
+    static String repeat(String a, int x){
+        StringBuilder res = new StringBuilder();
+        for(int i = 0; i<x;i++){
+            res.append(a);
+        }
+        return res.toString();
+    }
 }

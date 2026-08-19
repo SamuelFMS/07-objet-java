@@ -111,13 +111,13 @@ public class Shop {
     }
 
     public String toString(LocalDate currentDate) {
-        StringBuilder res = new StringBuilder();
-        res.append("Index | ").append("Fruit / Légume | ").append("Stock | ").append("Prix(au kg ou a l'unité) | ").append("Nombre de jours restants avant péremption").append("\n");
+        Table displayShopTable = new Table();
+        displayShopTable.addLine("ID", "Produit", "Stock", "Prix", "Périme dans (J)");
         int index = 1;
         for (Product product : myProducts) {
-            res.append(index).append(" | ").append(product.toString(currentDate)).append("\n");
+            displayShopTable.addLine(String.valueOf(index), product.getName(), product.stockFormat(), product.priceFormat(), product.daysRemainingBeforeExpiration(currentDate) + " Jours");
             index++;
         }
-        return res.toString();
+        return displayShopTable.toString();
     }
 }
